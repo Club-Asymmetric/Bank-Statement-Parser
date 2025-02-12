@@ -2,3 +2,5 @@
 *.xls
 *.xlsx
 *.xlsm
+
+__pycache__/
