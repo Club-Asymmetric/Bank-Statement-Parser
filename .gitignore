@@ -4,3 +4,7 @@
 *.xlsm
 
 __pycache__/
+
+output/
+
+bank_statements/

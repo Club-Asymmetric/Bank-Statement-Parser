@@ -73,5 +73,5 @@ def extract_sbi_bank(pdf_path, excel_path):
     # Save the DataFrame to an Excel file
     df.to_excel(excel_path, index=False)
 
-    print(f"Successfully extracted transactions to {excel_path}")
+    print(f"Successfully extracted {len(transactions)} transactions to {excel_path}")
     return df

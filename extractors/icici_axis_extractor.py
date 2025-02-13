@@ -4,12 +4,11 @@ import re
 
 def extract_icici_axis_bank(pdf_path, excel_path):
     transactions = []
-    previous_balance = None
-
+    
     with pdfplumber.open(pdf_path) as pdf:
         for page in pdf.pages:
             lines = page.extract_text().split('\n')
-
+            
             for line in lines:
                 line = line.strip()
                 if not line:
@@ -29,19 +28,14 @@ def extract_icici_axis_bank(pdf_path, excel_path):
                             deposit, withdrawal = 0.0, 0.0
                             if transaction_type == "CR":
                                 deposit = amount
-                                if previous_balance is not None:
-                                    previous_balance += deposit
                             elif transaction_type == "DR":
                                 withdrawal = amount
-                                if previous_balance is not None:
-                                    previous_balance -= withdrawal
 
                             transactions.append({
                                 'Date': date,
                                 'Transaction Details': 'Transaction',
                                 'Deposits': deposit,
-                                'Withdrawals': withdrawal,
-                                'Balance': previous_balance if previous_balance is not None else "Unknown"
+                                'Withdrawals': withdrawal
                             })
 
                         except ValueError:
@@ -52,7 +46,7 @@ def extract_icici_axis_bank(pdf_path, excel_path):
 
     # Save to Excel
     with pd.ExcelWriter(excel_path, engine='openpyxl') as writer:
-        df.to_excel(writer, index=False, sheet_name='ICICI_Axis Bank Statement')
+        df.to_excel(writer, index=False, sheet_name='Bank Statement')
 
     print(f"Successfully extracted {len(transactions)} transactions to {excel_path}")
     return df
