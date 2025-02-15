@@ -52,9 +52,8 @@ def extract_icici_bank(pdf_path, excel_path):
     # Convert to DataFrame
     df = pd.DataFrame(transactions)
     
-    # Save to Excel
-    with pd.ExcelWriter(excel_path, engine='openpyxl') as writer:
-        df.to_excel(writer, index=False, sheet_name='Bank Statement')
+    # Save the DataFrame to an Excel file
+    df.to_excel(excel_path, index=False, engine='openpyxl')
 
     print(f"Successfully extracted {len(transactions)} transactions to {excel_path}")
     return df

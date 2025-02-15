@@ -18,15 +18,63 @@ This project provides a bank statement parsing solution for multiple Indian bank
 - **Standardized Output**: Unified data format across banks
 - **Easy Integration**: Simple to incorporate into existing systems
 
-
-### Tables
-| Bank | Status |
-|------|--------|
-| SBI | ✅ |
+| Bank  | Status |
+|-------|--------|
+| SBI   | ✅ |
 | ICICI | ✅ |
 | Canara | ✅ |
-| TMB | ✅ |
-| KVB | 🚧 |
+| TMB   | ✅ |
+| KVB   | 🚧 |
 
 ---
-**Note**: This project is under active development.
+
+## How to Run
+
+### 1. Install Dependencies
+Ensure you have Python installed (preferably Python 3.8 or later). Then, install the required dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+### 2. Start the Flask Server
+Run the following command to start the backend server:
+
+```bash
+python server.py
+```
+
+### 3. Open the Web Interface
+- Open `static/index.html` in a web browser.
+- Upload a password-protected bank statement and enter the correct password.
+- The system will unlock the PDF, process the data, and save it in the `output/` folder.
+
+### 4. Process Bank Statements Manually
+If you want to process bank statements manually without using the web interface, run:
+
+```bash
+python main.py
+```
+
+---
+
+## `requirements.txt`
+The following dependencies should be added to `requirements.txt`:
+
+```
+Flask
+pypdf
+pdfplumber
+openpyxl
+pandas
+```
+
+Install them using:
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+**Note**: This project is under active development. Future updates will include more bank support and additional features.
+

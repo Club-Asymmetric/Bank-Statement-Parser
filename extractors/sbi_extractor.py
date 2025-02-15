@@ -70,7 +70,7 @@ def extract_sbi_bank(pdf_path, excel_path):
     df = pd.concat([df, pd.DataFrame([[None, 'Closing Balance', 0.0, 0.0, last_balance]], columns=df.columns)])
     
     # Save the DataFrame to an Excel file
-    df.to_excel(excel_path, index=False)
+    df.to_excel(excel_path, index=False, engine='openpyxl')
 
     print(f"Successfully extracted {len(transactions)} transactions to {excel_path}")
     return df

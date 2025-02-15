@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload & Unlock PDF</title>
+</head>
+<body>
+    <h2>Upload a Password-Protected Bank Statement</h2>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="pdfFile" accept=".pdf" required>
+        <input type="password" id="pdfPassword" placeholder="Enter PDF Password" required>
+        <button type="submit">Upload & Unlock</button>
+    </form>
+    <p id="message"></p>
+
+    <script>
+        document.getElementById("uploadForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            let file = document.getElementById("pdfFile").files[0];
+            let password = document.getElementById("pdfPassword").value;
+            if (!file || !password) {
+                alert("Please select a file and enter the password.");
+                return;
+            }
+
+            let formData = new FormData();
+            formData.append("file", file);
+            formData.append("password", password);
+
+            let response = await fetch("http://127.0.0.1:5000/upload", {
+                method: "POST",
+                body: formData
+            });
+
+            let result = await response.json();
+            document.getElementById("message").innerText = result.message;
+        });
+    </script>
+</body>
+</html>
