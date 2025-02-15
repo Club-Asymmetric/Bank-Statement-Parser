@@ -66,7 +66,6 @@ def extract_sbi_bank(pdf_path, excel_path):
     df = pd.DataFrame(transactions, columns=['Date', 'Transaction Details', 'Deposits', 'Withdrawals', 'Balance'])
     
     # Add opening and closing balances
-    df = pd.concat([pd.DataFrame([[None, 'Opening Balance', 0.0, 0.0, opening_balance]], columns=df.columns), df])
     last_balance = df['Balance'].iloc[-1] if not df.empty else 0.0
     df = pd.concat([df, pd.DataFrame([[None, 'Closing Balance', 0.0, 0.0, last_balance]], columns=df.columns)])
     
