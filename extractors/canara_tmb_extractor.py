@@ -2,7 +2,7 @@ import pdfplumber
 import pandas as pd
 import re
 
-def extract_canara_bank(pdf_path, excel_path):
+def extract_canara_tmb_bank(pdf_path, excel_path):
     transactions = []
     previous_balance = None
     opening_balance = None

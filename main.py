@@ -1,8 +1,8 @@
 import pdfplumber
 import os
-from extractors.canara_extractor import extract_canara_bank
+from extractors.canara_tmb_extractor import extract_canara_tmb_bank
 from extractors.sbi_extractor import extract_sbi_bank
-from extractors.icici_axis_extractor import extract_icici_axis_bank
+from extractors.icici_extractor import extract_icici_bank
 
 def detect_bank_type(pdf_path):
     with pdfplumber.open(pdf_path) as pdf:
@@ -12,11 +12,11 @@ def detect_bank_type(pdf_path):
 
         text = text.lower()
         if "canara bank" in text or "opening balance" in text:
-            return "Canara Bank (Format)"
+            return "Canara TMB (Format)"
         elif "state bank of india" in text or "ifs code sbin" in text or "savingsaccount" in text:
             return "SBI (Format)"
-        elif "icici bank" in text or "axis bank" in text or "dr" in text or "cr" in text:
-            return "ICICI_Axis"
+        elif "icici bank" in text or "dr" in text or "cr" in text:
+            return "ICICI (Format)"
 
     return None
 
@@ -39,12 +39,12 @@ def main():
             excel_path = os.path.join(output_folder, pdf_file.replace(".pdf", ".xlsx"))
             print(f"Processing {pdf_file} as {bank_type}...")
 
-            if bank_type == "Canara Bank (Format)":
-                extract_canara_bank(pdf_path, excel_path)
+            if bank_type == "Canara TMB (Format)":
+                extract_canara_tmb_bank(pdf_path, excel_path)
             elif bank_type == "SBI (Format)":
                 extract_sbi_bank(pdf_path, excel_path)
-            elif bank_type == "ICICI_Axis":
-                extract_icici_axis_bank(pdf_path, excel_path)
+            elif bank_type == "ICICI (Format)":
+                extract_icici_bank(pdf_path, excel_path)
             else:
                 print(f"No extractor found for {bank_type}. Skipping...")
 
