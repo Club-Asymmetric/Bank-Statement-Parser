@@ -3,20 +3,22 @@ import os
 from extractors.canara_tmb_extractor import extract_canara_tmb_bank
 from extractors.sbi_extractor import extract_sbi_bank
 from extractors.icici_extractor import extract_icici_bank
+from extractors.extract_kvb_bank import extract_kvb_bank
 
 def detect_bank_type(pdf_path):
     with pdfplumber.open(pdf_path) as pdf:
         text = ""
         for page in pdf.pages[:2]:  # Read first 2 pages for detection
             text += page.extract_text() + "\n"
-
         text = text.lower()
         if "canara bank" in text or "opening balance" in text:
             return "Canara TMB (Format)"
-        elif "state bank of india" in text or "ifs code sbin" in text or "savingsaccount" in text:
-            return "SBI (Format)"
-        elif "icici bank" in text or "dr" in text or "cr" in text:
-            return "ICICI (Format)"
+        elif "state bank of india" in text:
+            return "SBI"
+        elif "b/f" in text:
+            return "KVB (Format)"
+        elif "icici bank" in text or "cr" in text or "dr" in text:
+            return "ICICI"
 
     return None
 
@@ -41,10 +43,12 @@ def main():
 
             if bank_type == "Canara TMB (Format)":
                 extract_canara_tmb_bank(pdf_path, excel_path)
-            elif bank_type == "SBI (Format)":
+            elif bank_type == "SBI":
                 extract_sbi_bank(pdf_path, excel_path)
-            elif bank_type == "ICICI (Format)":
+            elif bank_type == "ICICI":
                 extract_icici_bank(pdf_path, excel_path)
+            elif bank_type == "KVB (Format)":
+                extract_kvb_bank(pdf_path, excel_path)
             else:
                 print(f"No extractor found for {bank_type}. Skipping...")
 

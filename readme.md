@@ -9,9 +9,10 @@ This project provides a bank statement parsing solution for multiple Indian bank
 - ICICI Bank
 - Canara Bank
 - TMB (Tamilnad Mercantile Bank)
+- KVB (Karur Vysya Bank)
 
 🚧 In Development:
-- KVB (Karur Vysya Bank)
+- More banks coming soon! If you need support for a specific bank, please create an issue.
 
 ## Features
 - **Multi-Bank Support**: Process statements from different banks
@@ -24,7 +25,7 @@ This project provides a bank statement parsing solution for multiple Indian bank
 | ICICI | ✅ |
 | Canara | ✅ |
 | TMB   | ✅ |
-| KVB   | 🚧 |
+| KVB   | ✅ |
 
 ---
 
@@ -76,5 +77,5 @@ pip install -r requirements.txt
 
 ---
 
-**Note**: This project is under active development. Future updates will include more bank support and additional features.
+**Note**: This project is under active development. If you need support for a specific bank that's not listed, please create an issue on GitHub.
 
